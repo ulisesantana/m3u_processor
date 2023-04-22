@@ -11,6 +11,9 @@ class TestM3UProcessor(unittest.TestCase):
         m3u_files = read_m3u_file("test_duplicates_invalid.m3u")
         self.assertEqual(m3u_files, {"test1.mp3", "invalid_path.mp3"})
 
+        # Clean up test files
+        os.remove("test_duplicates_invalid.m3u")
+
     def test_get_audio_files_nested_directories(self):
         os.makedirs("test_nested_dir/level1/level2", exist_ok=True)
         with open("test_nested_dir/test1.mp3", "w") as f1, open(
@@ -61,6 +64,9 @@ class TestM3UProcessor(unittest.TestCase):
         m3u_files = read_m3u_file("test_empty.m3u")
         self.assertEqual(m3u_files, set())
 
+        # Clean up test files
+        os.remove("test_empty.m3u")
+
     def test_get_audio_files_empty_directory(self):
         os.makedirs("test_empty_dir", exist_ok=True)
 
@@ -76,6 +82,9 @@ class TestM3UProcessor(unittest.TestCase):
 
         m3u_files = read_m3u_file("test_falsy_lines.m3u")
         self.assertEqual(m3u_files, {"test1.mp3", "invalid_path.mp3"})
+
+        # Clean up test files
+        os.remove("test_falsy_lines.m3u")
 
 
 if __name__ == "__main__":
